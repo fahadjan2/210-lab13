@@ -8,7 +8,6 @@
 using namespace std;
 
 int main() {
-    cout << "test2" << endl;
     //File Opening
 	ifstream file;
 	file.open("elements.txt");
