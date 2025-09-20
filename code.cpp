@@ -1,16 +1,14 @@
-// COMSC-210 | Lab 11 | Fahad Fawad Ahmad
+// COMSC-210 | Lab 13 | Fahad Fawad Ahmad
 // IDE used: Visual Studio
-//Program uses an array to read off a file containing student IDs. It will read off the file and display a bunch of information based on it
+//Program uses a vector to read off a file containing student IDs. It will read off the file and display a bunch of information based on it
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-#include <array>
+#include <vector>
 using namespace std;
 
-const int SIZE = 30;
-
 int main() {
-	cout << "test" << endl;
+    cout << "test2" << endl;
     //File Opening
 	ifstream file;
 	file.open("elements.txt");
@@ -20,22 +18,21 @@ int main() {
 	}
     
 	//Array Initialization
-	array<int, SIZE> studentIDs;
-	array<int, SIZE> ages;
+	vector<int> studentIDs;
+	vector<int> ages;
 	string sID;
 	int count = 0;
 
     while (getline(file, sID)) {
-		studentIDs[count] = stoi(sID.substr(0, 7));
-		ages[count] = stoi(sID.substr(8, 2));
-		count++;
+		studentIDs.push_back(stoi(sID.substr(0, 7)));
+		ages.push_back(stoi(sID.substr(8, 2)));
     }
 	file.close();
 
 	//Display
 	cout << "Student IDS:" << endl;
-	for (int i = 0; i < SIZE; i++) {
-		cout << studentIDs[i] << " ";
+	for (int id : studentIDs) {
+		cout << id << " ";
 	}
 	cout << endl;
 
@@ -46,21 +43,22 @@ int main() {
 
 	//Age w/ Student ID
 	cout << "\n\nStudent IDs paired with age: " << endl;
-	for (int i = 0; i < SIZE; i++) {
+	for (int i = 0; i < studentIDs.size(); i++) {
 		cout << "Student ID: " << studentIDs[i] << " -- Age: " << ages[i] << endl;
+        count++;
 	}
 
 	//Sorted
 	sort(studentIDs.begin(), studentIDs.end());
 	cout << "\nStudents sorted by ID: " << endl;
-	for (int i = 0; i < SIZE; i++) {
-		cout << studentIDs[i] << " ";
+	for (int id : studentIDs) {
+		cout << id << " ";
 	}
 	cout << endl;
 
 	//Find value
 	int IDToFind = 2225255;
-	array <int, SIZE>::iterator finder;
+	vector <int>::iterator finder;
 	finder = find(studentIDs.begin(), studentIDs.end(), IDToFind);
 	if (finder != studentIDs.end()) {
 		cout << IDToFind << " was found" << endl;
